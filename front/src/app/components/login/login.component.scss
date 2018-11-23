@@ -1,0 +1,63 @@
+.login {
+    display: inline-block;
+    position: absolute;
+    width: 25vw;
+    height: 50vh;
+    background-color: #E7DFDD;
+    top: 20vh;
+    margin-left: 35vw;
+    margin-right: 20vw;
+
+    .form {
+
+        .form-group {
+
+            input[type = text] {
+                position: absolute;
+                width: 90%;
+                height: 8%;
+                margin-left: 1vw;
+                margin-right: 1vw;
+                margin-top: 5vh;
+                background-color:#0E0B16;
+                color: #A239CA;
+                border: 2px solid #4717f6;
+                border-radius: 10px;
+            }
+            input[type = password] {
+                position: absolute;
+                width: 90%;
+                height: 8%;
+                margin-left: 1vw;
+                margin-right: 1vw;
+                margin-top: 15vh;
+                background-color:#0E0B16;
+                color: #A239CA;
+                border: 2px solid #4717f6;
+                border-radius: 10px;
+            }
+
+            input::placeholder {
+                color: #A239CA;
+            }
+           
+        }
+
+        .submit-btn {
+            position: absolute;
+            text-align: center;
+            width: 90%;
+            margin-left: 1vw;
+            margin-right: 1vw;
+            margin-top: 25vh;
+            background-color:#0E0B16;
+            color: #A239CA;
+            border: 2px solid #4717f6;
+            border-radius: 10px;
+
+        }
+
+    }
+    
+    
+}

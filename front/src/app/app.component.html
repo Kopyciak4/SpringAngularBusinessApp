@@ -1,0 +1,11 @@
+<div class = "app">
+  <div class = "topbar">
+    <div class = "sidebar-btn">
+        <i class="fa fa-bars" (click)="changeSlidebarState()"></i>
+    </div>
+  </div>
+  <app-sidebar *ngIf ="state"></app-sidebar>
+  <router-outlet></router-outlet>
+  
+  
+</div>
