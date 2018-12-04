@@ -3,22 +3,31 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { AuthGuard } from './guard/auth.guard';
+import { RouteGuard } from './guard/route.guard';
+
+import { AuthorizationService } from './services/authorization.service';
+import { InterceptorService } from './services/interceptor.service';
+
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
-import {AuthorizationService} from './services/authorization.service';
 
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 
 
 const appRoutes: Routes = [
-  {path:'', component: AppComponent},
-  {path:'login', component: LoginComponent},
-  {path:'dashboard', component: DashboardComponent},
+  {path:'', redirectTo: '/login', pathMatch: 'full' },
+  {path:'login', component: LoginComponent, canActivate:[RouteGuard]},
+  {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
+  {path:'welcome', component: WelcomeComponent,  canActivate:[AuthGuard]},
   
 ]
 
@@ -30,6 +39,7 @@ const appRoutes: Routes = [
     SidebarComponent,
     LoginComponent,
     DashboardComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +50,13 @@ const appRoutes: Routes = [
   ],
   providers: [
     AuthorizationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    },
+    AuthGuard,
+    RouteGuard
 
   ],
   bootstrap: [AppComponent]

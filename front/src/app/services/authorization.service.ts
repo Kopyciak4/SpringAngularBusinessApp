@@ -1,9 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, IterableDiffers } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user'
-import { MinLengthValidator } from '@angular/forms';
-import { npost } from 'q';
-
 
 
 @Injectable({
@@ -15,11 +12,11 @@ export class AuthorizationService {
   
 
   login(user: User){
-    let headers = {headers: new HttpHeaders(
-      {"Authorization": "Basic " + btoa( user.login+ ':' + user.password)}
-      )};
-      return this.httpClient.get('http://localhost:8080/account/login', headers);
+      return this.httpClient.post('http://localhost:8080/account/login', {}, {headers: new  HttpHeaders({ 
+        "Authorization": "Basic " + btoa( user.login+ ':' + user.password)
+      }),
+       observe: 'response'
+    } );
+  
   }
-
-}
-
+} 

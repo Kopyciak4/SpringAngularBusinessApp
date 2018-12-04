@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { AuthorizationService } from '../../services/authorization.service';
-import {Router} from '@angular/router';
-
+import { Router } from '@angular/router';
 
 
 
@@ -27,17 +26,13 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.auth.login(this.user).subscribe(response => {
-      console.log(response);
-      this.router.navigate(['dashboard']);
+    this.auth.login(this.user).subscribe((response: any)=> {
+      localStorage.setItem("Token", response.headers.get("Authorization"));
+      this.router.navigate(['welcome']);
     },
     err => {
       console.log("err");
-    }
-    );
-  
+    }); 
   }
-
-
 
 }
