@@ -12,12 +12,14 @@ import { AuthorizationService } from './services/authorization.service';
 import { InterceptorService } from './services/interceptor.service';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { AgGridModule } from 'ag-grid-angular';
 
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { EmployeesPageComponent } from './components/employees-page/employees-page.component';
 
 
 
@@ -28,6 +30,7 @@ const appRoutes: Routes = [
   {path:'login', component: LoginComponent, canActivate:[RouteGuard]},
   {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path:'welcome', component: WelcomeComponent,  canActivate:[AuthGuard]},
+  {path:'employees', component: EmployeesPageComponent,  canActivate:[AuthGuard]},
   
 ]
 
@@ -40,13 +43,15 @@ const appRoutes: Routes = [
     LoginComponent,
     DashboardComponent,
     WelcomeComponent,
+    EmployeesPageComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
     AngularFontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    AgGridModule.withComponents([]),
   ],
   providers: [
     AuthorizationService,

@@ -22,22 +22,17 @@ public class JWTAuthenticationFilter extends GenericFilterBean {
             ServletRequest req,
             ServletResponse res,
             FilterChain filterChain)
-        throws IOException, ServletException {
+            throws IOException, ServletException {
 
         Authentication authentication = null;
 
         try {
             authentication = TokenAuthenticationService.getAuthentication((HttpServletRequest) req);
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             ((HttpServletResponse) res).setStatus(HttpStatus.UNAUTHORIZED.value());
-
         }
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(req, res);
-
-
     }
 }

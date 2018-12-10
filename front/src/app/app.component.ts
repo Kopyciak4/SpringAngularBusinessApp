@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { AuthorizationService } from './services/authorization.service';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-root',
@@ -6,13 +10,38 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  constructor(
+    private auth: AuthorizationService,
+    private router: Router,
+  ){}
+
   title = 'app';
-  
   state = false;
 
 
   changeSlidebarState(){
     this.state = !this.state
   }
+
+  logout(){
+    this.auth.logout().subscribe((response: any)=> {
+      localStorage.removeItem("Token");
+      this.router.navigate(['login']);
+    },
+    err => {
+      console.log("nieok")
+    })
+  }
+
+  pobierzDane() {
+    this.auth.pobierz().subscribe(response => {
+      console.log(response);
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  
 
 }

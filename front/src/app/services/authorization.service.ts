@@ -12,11 +12,19 @@ export class AuthorizationService {
   
 
   login(user: User){
-      return this.httpClient.post('http://localhost:8080/account/login', {}, {headers: new  HttpHeaders({ 
+      return this.httpClient.get('http://localhost:8080/account/login', {headers: new  HttpHeaders({ 
         "Authorization": "Basic " + btoa( user.login+ ':' + user.password)
       }),
        observe: 'response'
-    } );
-  
+    });
+  }
+
+  logout(){
+    return this.httpClient.post('http://localhost:8080/account/logout', {})
+    
+  }
+
+  pobierz() {
+    return this.httpClient.post("http://localhost:8080/account/daj", {});
   }
 } 

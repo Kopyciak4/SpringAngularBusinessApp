@@ -1,26 +1,40 @@
 package babackend.BABackend.services;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
 
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.Date;
 
+@Service
 public class TokenAuthenticationService {
-    static final int EXPIRE_TIME =  30000;
+    static final int EXPIRE_TIME =  8640000;
     static final String SECRET = "Secret";
     static final String TOKEN_PREFIX = "Bearer";
     static final String HEADER_STRING = "Authorization";
     static Logger logger = LoggerFactory.getLogger(TokenAuthenticationService.class);
+    static TokenService tokenService2;
+
+    @Autowired
+    private TokenService tokenService;
+
+    @PostConstruct
+    private void initTokenService() {
+        tokenService2 = this.tokenService;
+    }
 
     public static void addAuthentication(HttpServletResponse res, String login){
         String JWT = Jwts.builder()
@@ -41,11 +55,38 @@ public class TokenAuthenticationService {
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                     .getBody()
                     .getSubject();
-
-            return user != null ?
-                    new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList()) :
-                    null;
+            if(user == null){
+                logger.info("BRAK USERA");
+                return null;
+            }else {
+                logger.info("CZY JEST TOKEN? " + tokenService2.getToken(user));
+                if(tokenService2.getToken(user)== null) {
+                    logger.info("NIE JEST NA CZARNEJ LISCIE");
+                    return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
+                } else {
+                    logger.info("JEST NA CZARNEJ LISCIE");
+                    return null;
+                }
+            }
         }
         return null;
+
     }
+
+    public static void saveTokenToBlacklist(HttpServletRequest req) {
+
+        String token = req.getHeader(HEADER_STRING);
+
+        Claims body = Jwts.parser()
+                .setSigningKey(SECRET)
+                .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
+                .getBody();
+
+        Date exp = body.getExpiration();
+        tokenService2.saveToken( body.getSubject(), token, (exp.getTime() - System.currentTimeMillis()) );
+
+
+    }
+
+
 }
