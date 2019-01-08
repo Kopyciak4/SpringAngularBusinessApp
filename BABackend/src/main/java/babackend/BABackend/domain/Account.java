@@ -13,18 +13,24 @@ public class Account implements Serializable {
 
     @NotNull
     @Size(min=1, max=25)
+    @Column(nullable = false)
     private String name;
     @NotNull
     @Size(min=1, max=40)
+    @Column(nullable = false)
     private String adress;
     @NotNull
     @Size(min=1, max=40)
     @Email
+    @Column(nullable = false)
     private String email;
     @NotNull
     @Size(min=1, max=25)
+    @Column(nullable = false)
     private String surname;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private int accountID;
 
 

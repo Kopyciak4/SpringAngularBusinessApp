@@ -11,9 +11,11 @@ public class User implements Serializable {
 
     @NotNull
     @Size(min=1, max=30)
+    @Column(nullable = false, unique = true)
     private String login;
     @NotNull
     @Size(min=1, max=60)
+    @Column(nullable = false)
     private String password;
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
