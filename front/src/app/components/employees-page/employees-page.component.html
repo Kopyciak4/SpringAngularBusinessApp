@@ -1,9 +1,47 @@
 <div class ="main">
-	<ag-grid-angular 
-		style="width: 500px; height: 500px;" 
-		class="ag-theme-balham"
-		[rowData]="rowData" 
-		[columnDefs]="columnDefs"
-		[fullWidthCellRenderer]="fullWidthCellRenderer">
-	</ag-grid-angular>
+	<ng-template #modal let-modal>
+					<div class="modal-header">
+						<h4 class="modal-title" id="modal-basic-title" >Add profile</h4>
+						<button type="button" clas="close" (click)="modal.dismiss()">
+							<span >&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form #username="ngForm" (ngSubmit)="modal.close()">
+							<div class="form-group">
+								<label for="name">Login</label>
+								<div class="input-group">
+									<input id="name" name="name" class="form-group" required [(ngModel)]="login" maxlength="30" (ngModelChange)="modelChanged($event)">
+									<div class="input-group-append">
+										<button class="btn-outline-primary" type="submit" [disabled]="username.form.invalid || accountExists">Next</button>
+									</div>
+								</div>
+							</div>
+							<span *ngIf="!username.form.valid">ZLE</span>
+						</form>
+					</div>
+					
+	</ng-template>
+
+	<div class="container">
+			<button class="btn btn-lg btn-outline-primary" (click)="openModal(modal)" >Add worker</button>
+	</div>
+
+		<ag-grid-angular 
+			style="width: 70%; height: 80%;" 
+			class="ag-theme-balham"
+			[rowData]="rowData" 
+			[columnDefs]="columnDefs"
+			[fullWidthCellRenderer]="fullWidthCellRenderer"
+			[enableSorting] = "true"
+			[animateRows] = "true"
+			[multiSortKey] = "multiSortKey"
+			(firstDataRendered)="onFirstDataRendered($event)"
+    		[rowSelection]="rowSelection"
+			(selectionChanged)="onSelectionChanged($event)"
+			(gridReady)="onGridReady($event)"
+			*ngIf="rowData.length">
+		</ag-grid-angular>
+
 </div> 
+

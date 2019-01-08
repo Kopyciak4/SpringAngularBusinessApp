@@ -1,6 +1,8 @@
-import { Injectable, IterableDiffers } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user'
+import { Observable } from 'rxjs';
+import { Account } from '../models/account';
 
 
 @Injectable({
@@ -24,7 +26,19 @@ export class AuthorizationService {
     
   }
 
-  pobierz() {
-    return this.httpClient.post("http://localhost:8080/account/daj", {});
+  getAccounts() :Observable<Account[]> {
+    return this.httpClient.get<Account[]>("http://localhost:8080/accounts"); 
   }
+  
+  registerAccount(account: Account) {
+    return this.httpClient.post("http://localhost:8080/account/register", 
+    account
+    );
+  }
+
+  getAccount(login: string) :Observable<Account>{
+    return this.httpClient.get<Account>('http://localhost:8080/accounts/' + login); 
+  }
+
+
 } 

@@ -34,13 +34,6 @@ export class AppComponent {
     })
   }
 
-  pobierzDane() {
-    this.auth.pobierz().subscribe(response => {
-      console.log(response);
-    }, err => {
-      console.log(err);
-    })
-  }
 
   
 

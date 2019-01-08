@@ -1,0 +1,45 @@
+<div class = "container">
+  <form (ngSubmit)="registerAccount()" #userForm="ngForm">
+  <div class = "login-data">
+    <h3>Login Data</h3>
+      <div>
+        <span>Login</span>
+        <div>{{account.user.login}}</div>
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input class="form-group" name="password" required [(ngModel)]="account.user.password" maxlength="60">
+      </div>
+    
+  </div>
+
+  <div class = "personal-data">
+    <h4>Personal Data</h4>
+    
+      <div>
+        <label for="name">Name</label>
+        <input class="form-group" name="name" required [(ngModel)]="account.name" maxlength="25">
+      </div>
+      <div>
+          <label for="surname">Surname</label>
+          <input class="form-group" name="surname" required [(ngModel)]="account.surname" maxlength="25">
+      </div>
+      <div>
+          <label for="email">Email</label>
+          <input class="form-group" name="email" required [(ngModel)]="account.email" type="email" maxlength="40" email>
+      </div>
+      <div>
+          <label for="adress">Adress</label>
+          <input class="form-group" name="adress" required [(ngModel)]="account.adress" maxlength="40">
+      </div>
+    
+  </div>
+
+  
+  <div calss = "tasks">
+
+  </div>
+  <button class="btn-primary" type="submit" [disabled]="userForm.form.invalid">Save</button>
+  </form>
+ 
+</div> 

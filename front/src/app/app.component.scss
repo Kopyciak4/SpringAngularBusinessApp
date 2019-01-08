@@ -8,7 +8,7 @@
         height: 5vh;
         background-color: #E7DFDD;
         position: fixed;
-        
+
         .logout-btn {
           float: right;
           margin-right: 5%; 
@@ -23,5 +23,10 @@
                 }
             }
         }
+        
+    }
+
+    .router{
+       padding-top: 200px;
     }
 }

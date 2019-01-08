@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,8 +15,10 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   user: User = {
-    login: '', password: ''
-  }
+    login: '',
+    password: '', 
+    userID: 0
+  }  
 
   constructor(
     private auth: AuthorizationService,
@@ -23,6 +26,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
   }
 
   login() {

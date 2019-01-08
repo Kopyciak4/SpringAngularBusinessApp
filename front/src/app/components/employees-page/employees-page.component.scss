@@ -1,16 +1,19 @@
 .main {
     width: 100%;
-    height: 100%;
+    height: 300px;
     position: relative;
+    float: right; 
+    margin-right: 2%;
     
     ag-grid-angular {
         position: relative;
-        margin-left: 20%;
-        top: 20%;
+        margin-left: 10%;
+        top: 15%;
+        float: right;
     
 
         .ag-body-viewport {
-            overflow-x: hidden !important;
+            
             width: 100vw;
                 height:80vh; 
         }

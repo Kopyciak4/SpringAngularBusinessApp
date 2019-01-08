@@ -47,6 +47,7 @@ public class TokenAuthenticationService {
     }
 
     public static Authentication getAuthentication(HttpServletRequest req) throws UnsupportedEncodingException {
+
         String token = req.getHeader(HEADER_STRING);
         if(token != null) {
             logger.info("MOJ TOKEN: " + token);
@@ -59,8 +60,9 @@ public class TokenAuthenticationService {
                 logger.info("BRAK USERA");
                 return null;
             }else {
+                String getToken = tokenService2.getToken(user);
                 logger.info("CZY JEST TOKEN? " + tokenService2.getToken(user));
-                if(tokenService2.getToken(user)== null) {
+                if(getToken == null || !getToken.equals(token) ) {
                     logger.info("NIE JEST NA CZARNEJ LISCIE");
                     return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
                 } else {
