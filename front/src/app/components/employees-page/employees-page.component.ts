@@ -44,7 +44,8 @@ export class EmployeesPageComponent implements OnInit {
 						name: response[i].name,
 						surname: response[i].surname,
 						email: response[i].email,
-						adress: response[i].adress
+						adress: response[i].adress,
+						accountid: response[i].accountID
 				}  
 				this.rowData.push(row);
 				
@@ -92,11 +93,30 @@ export class EmployeesPageComponent implements OnInit {
 	}
 
 	onSelectionChanged() {
-	this.selectedLogin = this.gridApi.getSelectedRows()[0].login;
-	console.log(this.selectedLogin);
+		this.selectedLogin = this.gridApi.getSelectedRows()[0].login;
+		console.log(this.selectedLogin);
 	}
 
+	
 	onGridReady(params) {
 		this.gridApi = params.api;
 	}
+
+	editProfile() {
+		this.router.navigate(['profile',this.selectedLogin]);
+	}
+
+	deleteProfile() {
+		let accountToDelete = this.gridApi.getSelectedRows()[0];
+		this.auth.deleteAccount(accountToDelete.accountid).subscribe(res => {
+			console.log(accountToDelete);
+			console.log(this.rowData.indexOf(accountToDelete));
+			//this.rowData = this.rowData.splice(this.rowData.indexOf(accountToDelete), 1); 
+			this.rowData = this.rowData.filter((row) => row.login != this.selectedLogin); 
+			this.selectedLogin = null;
+		});
+
+	}
+	
+
 }

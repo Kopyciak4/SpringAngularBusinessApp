@@ -19,10 +19,10 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { EmployeesPageComponent } from './components/employees-page/employees-page.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { TasksPageComponent } from './components/tasks-page/tasks-page.component';
 
 
 
@@ -31,10 +31,10 @@ import { ProfileComponent } from './components/profile/profile.component';
 const appRoutes: Routes = [
   {path:'', redirectTo: '/login', pathMatch: 'full' },
   {path:'login', component: LoginComponent, canActivate:[RouteGuard]},
-  {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path:'welcome', component: WelcomeComponent,  canActivate:[AuthGuard]},
   {path:'employees', component: EmployeesPageComponent,  canActivate:[AuthGuard]},
-  {path:'profile/:login', component: ProfileComponent, canActivate:[AuthGuard]}
+  {path:'profile/:login', component: ProfileComponent, canActivate:[AuthGuard]},
+  {path:'tasks', component: TasksPageComponent,  canActivate:[AuthGuard]},
   
 ]
 
@@ -45,10 +45,10 @@ const appRoutes: Routes = [
     AppComponent,
     SidebarComponent,
     LoginComponent,
-    DashboardComponent,
     WelcomeComponent,
     EmployeesPageComponent,
     ProfileComponent,
+    TasksPageComponent,
   ],
   imports: [
     NgbModalModule,

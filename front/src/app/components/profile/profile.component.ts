@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Account } from '../../models/account';
 import { AuthorizationService } from '../../services/authorization.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -26,24 +27,38 @@ export class ProfileComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private auth: AuthorizationService,
+    private router: Router,
 
   
   ) { 
     this.route.params.subscribe(params => {
       this.account.user.login = params.login
-      this.auth.getAccount(params.login).subscribe(res => {
-        console.log(res);
+      this.auth.getAccount(params.login).subscribe((res:Account) => {
+        if(res){
+          this.account = res;
+        } 
       })
     })
+   
   }
 
   ngOnInit() {
   }
 
-  registerAccount(){
-    this.auth.registerAccount(this.account).subscribe(res=> {
-      console.log(1); 
-    });
+  saveAccount(){
+    if (!this.account.accountID) {
+      this.auth.registerAccount(this.account).subscribe(res=> {
+        console.log(1);
+        this.router.navigate(['employees']); 
+      });
+    }else {
+      this.auth.updateAccount(this.account).subscribe(res =>{
+        console.log(2);
+        this.router.navigate(['employees']); 
+      });
+    }
+    
+   
   }
 
 

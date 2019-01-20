@@ -14,5 +14,9 @@ public interface AccountService {
 
     Account getAccount(String login);
 
+    void updateAccount(Account account);
+
+    void deleteAccount(int accountID);
+
 }
 

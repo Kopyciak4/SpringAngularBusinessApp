@@ -1,5 +1,5 @@
 <div class = "container">
-  <form (ngSubmit)="registerAccount()" #userForm="ngForm">
+  <form (ngSubmit)="saveAccount()" #userForm="ngForm">
   <div class = "login-data">
     <h3>Login Data</h3>
       <div>
@@ -8,8 +8,10 @@
       </div>
       <div>
         <label for="password">Password</label>
-        <input class="form-group" name="password" required [(ngModel)]="account.user.password" maxlength="60">
+        <input class="form-group" name="password"  [(ngModel)]="account.user.password" maxlength="60">
       </div>
+
+     
     
   </div>
 
@@ -18,7 +20,7 @@
     
       <div>
         <label for="name">Name</label>
-        <input class="form-group" name="name" required [(ngModel)]="account.name" maxlength="25">
+        <input class="form-group" name="name"  [(ngModel)]="account.name" maxlength="25">
       </div>
       <div>
           <label for="surname">Surname</label>

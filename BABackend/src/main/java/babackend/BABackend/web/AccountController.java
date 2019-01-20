@@ -6,12 +6,15 @@ import babackend.BABackend.domain.User;
 import babackend.BABackend.services.AccountService;
 import babackend.BABackend.services.AccountServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
 @RestController
+@RequestMapping("/accounts")
 public class AccountController {
 
     AccountService accountService;
@@ -21,16 +24,28 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @GetMapping("/accounts")
+    @GetMapping()
     public List<Account> getAccounts(){
        return accountService.getAccounts();
 
     }
 
-    @GetMapping("/accounts/{login}")
+    @GetMapping("/{login}")
     public Account getAccount(
             @PathVariable String login){
         return accountService.getAccount(login);
     }
+
+    @PutMapping("/update")
+    public void updateAccount(@Validated @RequestBody Account account) {
+        accountService.updateAccount(account);
+    }
+
+    @DeleteMapping()
+    public void deleteAccount(@RequestParam("accountID") int accountID) {
+        accountService.deleteAccount(accountID);
+    }
+
+
 
 }

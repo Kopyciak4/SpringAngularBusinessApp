@@ -17,14 +17,16 @@
 									</div>
 								</div>
 							</div>
-							<span *ngIf="!username.form.valid">ZLE</span>
+							<span *ngIf="!username.form.valid">Fill input</span>
 						</form>
 					</div>
 					
 	</ng-template>
 
 	<div class="container">
-			<button class="btn btn-lg btn-outline-primary" (click)="openModal(modal)" >Add worker</button>
+			<button class="btn btn-lg btn-primary" (click)="openModal(modal)" >Hire new employee</button>
+			<button class="btn btn-lg btn-warning" (click)="editProfile()"[disabled]="!selectedLogin">Edit profile</button>
+			<button class="btn btn-lg btn-danger" (click)="deleteProfile()"[disabled]="!selectedLogin">Dismiss an employee</button>
 	</div>
 
 		<ag-grid-angular 

@@ -1,6 +1,7 @@
 package babackend.BABackend.domain;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -36,6 +37,7 @@ public class Account implements Serializable {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinColumn(name = "loginDetailsId")
+    @Valid
     private User user;
 
 

@@ -11,7 +11,6 @@ export class SidebarComponent implements OnInit {
   sidebarList: SidebarElementList[] = [
     {name: 'Employees', link: '/employees'},
     {name: 'Tasks', link: '/tasks'},
-    {name: 'Calendar', link: '/calendar'}
   ];
 
   constructor() { }

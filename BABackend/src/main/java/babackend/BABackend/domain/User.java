@@ -1,6 +1,10 @@
 package babackend.BABackend.domain;
 
+import babackend.BABackend.validation.EmptyPasswordValidation;
+
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -14,7 +18,8 @@ public class User implements Serializable {
     @Column(nullable = false, unique = true)
     private String login;
     @NotNull
-    @Size(min=1, max=60)
+    @NotEmpty(groups = {EmptyPasswordValidation.class})
+    @Size(max=60)
     @Column(nullable = false)
     private String password;
     @Id

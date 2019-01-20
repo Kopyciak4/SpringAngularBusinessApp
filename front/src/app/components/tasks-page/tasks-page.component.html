@@ -1,0 +1,23 @@
+<div class="task">
+    <div class="container">
+        <button class="btn btn-lg btn-primary" (click)="addTask()" >Add new task</button>
+        <button class="btn btn-lg btn-warning" (click)="editTask()"[disabled]="!selectedTask">Edit task</button>
+        <button class="btn btn-lg btn-danger" (click)="deleteTask()"[disabled]="!selectedTask">Delete task</button>
+      </div>
+      
+      <ag-grid-angular 
+        style="width: 70%; height: 80%;" 
+        class="ag-theme-balham"
+        [rowData]="rowData" 
+        [columnDefs]="columnDefs"
+        [fullWidthCellRenderer]="fullWidthCellRenderer"
+        [enableSorting] = "true"
+        [animateRows] = "true"
+        [multiSortKey] = "multiSortKey"
+        (firstDataRendered)="onFirstDataRendered($event)"
+          [rowSelection]="rowSelection"
+        (selectionChanged)="onSelectionChanged($event)"
+        (gridReady)="onGridReady($event)"
+        *ngIf="rowData.length">
+      </ag-grid-angular> 
+</div>

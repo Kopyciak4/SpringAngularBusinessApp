@@ -14,7 +14,7 @@ public class AccountServiceImpl implements AccountService {
 
     private AccountsRepository accountsRepository;
     private PasswordEncoder passwordEncoder;
-
+    
     @Autowired
     public AccountServiceImpl(AccountsRepository accountsRepository){
         this.accountsRepository = accountsRepository;
@@ -39,7 +39,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void register(Account account){
-        account.getUser().setPassword( passwordEncoder.encode(account.getUser().getPassword()));
+        encryptPassword(account);
         accountsRepository.save(account);
     }
 
@@ -51,4 +51,25 @@ public class AccountServiceImpl implements AccountService {
         account.getUser().setPassword("");
         return account;
     }
+
+    @Override
+    public void updateAccount(Account account) {
+        if(account.getUser().getPassword().equals("")) {
+            account.getUser().setPassword(
+                    accountsRepository.findById(account.getAccountID()).get().getUser().getPassword()
+            );
+        }else {
+            encryptPassword(account);
+        }
+        accountsRepository.save(account);
+    }
+
+    @Override
+    public void deleteAccount(int accountID) {
+        accountsRepository.deleteById(accountID);
+    }
+
+    private void encryptPassword(Account account) {
+        account.getUser().setPassword( passwordEncoder.encode(account.getUser().getPassword()));
+    } 
 }

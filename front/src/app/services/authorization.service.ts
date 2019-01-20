@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from '../models/user'
 import { Observable } from 'rxjs';
 import { Account } from '../models/account';
@@ -40,5 +40,15 @@ export class AuthorizationService {
     return this.httpClient.get<Account>('http://localhost:8080/accounts/' + login); 
   }
 
+  updateAccount(account: Account) {
+    return this.httpClient.put("http://localhost:8080/accounts/update", account);
+  }
+
+  deleteAccount(accountID: number) {
+    let params = new HttpParams().set('accountID', accountID.toString())
+
+    return this.httpClient.delete("http://localhost:8080/accounts", {params:params}); 
+  }
+ 
 
 } 
