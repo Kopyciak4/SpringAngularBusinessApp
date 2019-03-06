@@ -1,0 +1,26 @@
+.container {
+    width: 80%;
+    height: 80%;
+    top: 200px;
+    color: white;
+
+    .task-data {
+        .desc{
+            display: inline-block;
+        }
+        .selectbox {
+            display: inline;
+            position: relative;
+            margin-left: 10%;
+            
+            
+        }
+    }
+
+
+    .form-group{
+        display: block;
+    }
+
+
+}

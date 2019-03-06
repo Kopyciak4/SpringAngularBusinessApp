@@ -1,14 +1,10 @@
 <div class = "app">
-  <div class = "topbar">
-    <button class="btn btn-lg btn-info logout-btn" (click)="logout()" >Logout</button>
-    <div class = "sidebar-btn">
-        <i class="fa fa-bars" (click)="changeSlidebarState()"></i>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class = "sidebar-btn" *ngIf = "auth.getLogin()">
+        <i class="fa fa-bars" (click)="changeSlidebarState()"  ></i>
     </div>
-  </div>
+    <button class="btn btn-lg btn-info logout-btn" (click)="logout()"  [hidden]="!auth.getLogin()">Logout</button>
+  </nav>
   <app-sidebar *ngIf ="state"></app-sidebar>
-  <div class="router">
       <router-outlet></router-outlet>
-  </div>
-
-  
 </div>

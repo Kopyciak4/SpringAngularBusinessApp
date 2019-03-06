@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from '../models/user'
 import { Observable } from 'rxjs';
 import { Account } from '../models/account';
-
+import { AuthorizationDetails } from "../models/authorization-details";
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +49,28 @@ export class AuthorizationService {
 
     return this.httpClient.delete("http://localhost:8080/accounts", {params:params}); 
   }
+
+  isAdmin(): boolean {
+
+    let authDetails = localStorage.getItem("authorizationDetails");
+    let userRole;
+    if(authDetails){
+      userRole =  (<AuthorizationDetails>JSON.parse(authDetails)).role;
+    }
+    return userRole === "ROLE_ADMIN";
+  }
+
+  getLogin(): string {
+    let authDetails = localStorage.getItem("authorizationDetails");
+    let login;
+    if(authDetails){
+      login =  (<AuthorizationDetails>JSON.parse(authDetails)).login;
+    }
+    return login; 
+    
+  }
+
+}
  
 
-} 
+ 

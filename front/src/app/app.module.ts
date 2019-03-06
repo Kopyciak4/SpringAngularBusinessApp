@@ -7,6 +7,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthGuard } from './guard/auth.guard';
 import { RouteGuard } from './guard/route.guard';
+import { RoleGuard } from './guard/role.guard';
 
 import { AuthorizationService } from './services/authorization.service';
 import { InterceptorService } from './services/interceptor.service';
@@ -23,6 +24,9 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { EmployeesPageComponent } from './components/employees-page/employees-page.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TasksPageComponent } from './components/tasks-page/tasks-page.component';
+import { TaskManagementComponent } from './components/task-management/task-management.component';
+import { UserTasksListComponent } from './components/user-tasks-list/user-tasks-list.component';
+
 
 
 
@@ -30,11 +34,12 @@ import { TasksPageComponent } from './components/tasks-page/tasks-page.component
 
 const appRoutes: Routes = [
   {path:'', redirectTo: '/login', pathMatch: 'full' },
-  {path:'login', component: LoginComponent, canActivate:[RouteGuard]},
+  {path:'login', component: LoginComponent, canLoad:[RouteGuard]},
   {path:'welcome', component: WelcomeComponent,  canActivate:[AuthGuard]},
-  {path:'employees', component: EmployeesPageComponent,  canActivate:[AuthGuard]},
-  {path:'profile/:login', component: ProfileComponent, canActivate:[AuthGuard]},
+  {path:'employees', component: EmployeesPageComponent,  canActivate:[AuthGuard,RoleGuard]},
+  {path:'profile/:login', component: ProfileComponent, canActivate:[AuthGuard, RoleGuard]},
   {path:'tasks', component: TasksPageComponent,  canActivate:[AuthGuard]},
+  {path:'task/:taskId', component: TaskManagementComponent,  canActivate:[AuthGuard]},
   
 ]
 
@@ -49,6 +54,8 @@ const appRoutes: Routes = [
     EmployeesPageComponent,
     ProfileComponent,
     TasksPageComponent,
+    TaskManagementComponent,
+    UserTasksListComponent,
   ],
   imports: [
     NgbModalModule,
@@ -67,7 +74,8 @@ const appRoutes: Routes = [
       multi: true
     },
     AuthGuard,
-    RouteGuard
+    RouteGuard,
+    RoleGuard
 
   ],
   bootstrap: [AppComponent]

@@ -3,7 +3,6 @@
     position: absolute;
     width: 25vw;
     height: 50vh;
-    background-color: #E7DFDD;
     top: 20vh;
     margin-left: 35vw;
     margin-right: 20vw;
@@ -15,30 +14,28 @@
             input[type = text] {
                 position: absolute;
                 width: 90%;
-                height: 8%;
+                height: 10%;
                 margin-left: 1vw;
                 margin-right: 1vw;
                 margin-top: 5vh;
-                background-color:#0E0B16;
-                color: #A239CA;
-                border: 2px solid #4717f6;
+                border: 2px solid #353333;
+                background-color: #c1c2bb;
                 border-radius: 10px;
             }
             input[type = password] {
                 position: absolute;
                 width: 90%;
-                height: 8%;
+                height: 10%;
                 margin-left: 1vw;
                 margin-right: 1vw;
                 margin-top: 15vh;
-                background-color:#0E0B16;
-                color: #A239CA;
-                border: 2px solid #4717f6;
+                background-color: #c1c2bb;
+                border: 2px solid #353333;
                 border-radius: 10px;
             }
 
             input::placeholder {
-                color: #A239CA;
+                color: #000000;
             }
            
         }
@@ -50,10 +47,8 @@
             margin-left: 1vw;
             margin-right: 1vw;
             margin-top: 25vh;
-            background-color:#0E0B16;
-            color: #A239CA;
-            border: 2px solid #4717f6;
             border-radius: 10px;
+            height: 10%;
 
         }
 

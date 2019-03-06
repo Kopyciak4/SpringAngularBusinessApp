@@ -1,0 +1,32 @@
+<div class = "container">
+  <form (ngSubmit)="auth.isAdmin() ? saveTask() :  returnToTasks()" #taskForm="ngForm">
+
+  <div class = "task-data">
+    <h4>Task Details</h4>
+      <div>
+        <label for="task-name">Name</label>
+        <input class="form-group" name="task-name"  [(ngModel)]="task.taskName" maxlength="40" required [disabled]="!auth.isAdmin()">
+      </div>
+      <div class="desc">
+          <label for="task-description">Task Description</label>
+          <textarea class="form-group" name="task-description" required [(ngModel)]="task.taskDescription" rows="4" cols="50" maxlength="200" [disabled]="!auth.isAdmin()"> </textarea>
+      </div>
+
+        <select *ngIf="auth.isAdmin()" [(ngModel)]="task.taskOwner" class="selectbox" name="owner" [compareWith]="compareFn" [disabled]="!auth.isAdmin()">
+          <option *ngFor="let account of accounts" [ngValue]="account.user">{{account.user.login}}</option>
+       </select>
+
+       <span *ngIf="!auth.isAdmin() && task.taskOwner">{{task.taskOwner.login}}</span>
+      
+     
+      </div>
+
+  
+  <div calss = "tasks">
+     
+
+  </div>
+  <button class="btn btn-primary" type="submit" [disabled]="taskForm.form.invalid">{{auth.isAdmin() ? 'Save':'Back'}}</button>
+  </form>
+ 
+</div> 

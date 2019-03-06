@@ -1,6 +1,9 @@
 package babackend.BABackend.domain;
 
 import babackend.BABackend.validation.EmptyPasswordValidation;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -8,6 +11,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class User implements Serializable {
@@ -25,6 +29,9 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int userID;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "taskOwner")
+    private List<Task> tasks;
 
 
 
@@ -55,6 +62,13 @@ public class User implements Serializable {
 
     public void setUserID(int userID) {
         this.userID = userID;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
 

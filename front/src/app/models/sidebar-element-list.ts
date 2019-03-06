@@ -1,4 +1,5 @@
 export interface SidebarElementList {
     name: string,
-    link: string
+    link: string,
+    onlyForAdmin: boolean
 }

@@ -9,7 +9,7 @@ export class RouteGuard implements CanActivate{
     ){}
 
     canActivate(){
-        if(!localStorage.getItem("Token")){
+        if(!localStorage.getItem("authorizationDetails")){
            return true; 
         }else { 
             this.router.navigate(['/welcome']);

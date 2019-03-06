@@ -1,5 +1,8 @@
 package babackend.BABackend.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,6 +22,12 @@ public class Task implements Serializable {
     private String taskName;
     @Size(max=200)
     private String taskDescription;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "task_owner")
+    private User taskOwner;
+
+
 
     public Task() {}
 
@@ -43,5 +52,14 @@ public class Task implements Serializable {
         this.taskDescription = taskDescription;
     }
 
+    public User getTaskOwner() {
+        return taskOwner;
+    }
+
+    public void setTaskOwner(User taskOwner) {
+        this.taskOwner = taskOwner;
+    }
+
 
 }
+

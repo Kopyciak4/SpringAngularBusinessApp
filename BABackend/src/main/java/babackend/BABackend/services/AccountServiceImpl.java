@@ -1,12 +1,15 @@
 package babackend.BABackend.services;
 
 import babackend.BABackend.DAO.AccountsRepository;
+import babackend.BABackend.DAO.TasksRepository;
 import babackend.BABackend.domain.Account;
+import babackend.BABackend.domain.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -14,11 +17,15 @@ public class AccountServiceImpl implements AccountService {
 
     private AccountsRepository accountsRepository;
     private PasswordEncoder passwordEncoder;
+    private TaskService taskService;
     
     @Autowired
-    public AccountServiceImpl(AccountsRepository accountsRepository){
+    public AccountServiceImpl(AccountsRepository accountsRepository, TaskService taskService){
         this.accountsRepository = accountsRepository;
+        this.taskService = taskService;
     }
+
+
 
     @Autowired
     public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
@@ -33,6 +40,9 @@ public class AccountServiceImpl implements AccountService {
 
         for (Account account : accounts) {
             account.getUser().setPassword("");
+            for (Task task : account.getUser().getTasks()) {
+                task.setTaskOwner(null);
+            }
         }
        return accounts;
     }
@@ -49,6 +59,9 @@ public class AccountServiceImpl implements AccountService {
         if(account == null)
             return null;
         account.getUser().setPassword("");
+        for (Task task : account.getUser().getTasks()) {
+            task.setTaskOwner(null);
+        }
         return account;
     }
 
@@ -65,8 +78,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional
     public void deleteAccount(int accountID) {
+        taskService.resetUserId(accountsRepository.findById(accountID).get().getUser().getUserID());
         accountsRepository.deleteById(accountID);
+
     }
 
     private void encryptPassword(Account account) {

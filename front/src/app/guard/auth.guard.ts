@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Router, CanActivate} from '@angular/router';
 
 
+
 @Injectable()
 export class AuthGuard implements CanActivate{
     constructor(
@@ -9,7 +10,7 @@ export class AuthGuard implements CanActivate{
     ){}
 
     canActivate(){
-        if(localStorage.getItem("Token")){ 
+        if(localStorage.getItem("authorizationDetails")){ 
            return true; 
         }else { 
             this.router.navigate(['/login']);

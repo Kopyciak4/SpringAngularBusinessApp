@@ -20,7 +20,8 @@ export class ProfileComponent implements OnInit {
     user: {
       login: '',
       password: '',
-      userID: 0
+      userID: 0,
+      tasks: []
     }
   }
 
@@ -31,11 +32,14 @@ export class ProfileComponent implements OnInit {
 
   
   ) { 
+    // pobieranie wartosci z url
     this.route.params.subscribe(params => {
       this.account.user.login = params.login
       this.auth.getAccount(params.login).subscribe((res:Account) => {
         if(res){
+          console.log(res);
           this.account = res;
+          console.log(this.account);
         } 
       })
     })
@@ -47,12 +51,12 @@ export class ProfileComponent implements OnInit {
 
   saveAccount(){
     if (!this.account.accountID) {
-      this.auth.registerAccount(this.account).subscribe(res=> {
+      this.auth.registerAccount(this.account).subscribe(()=> {
         console.log(1);
         this.router.navigate(['employees']); 
       });
     }else {
-      this.auth.updateAccount(this.account).subscribe(res =>{
+      this.auth.updateAccount(this.account).subscribe(() => {
         console.log(2);
         this.router.navigate(['employees']); 
       });

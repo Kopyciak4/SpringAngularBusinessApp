@@ -10,4 +10,14 @@ public interface TaskService {
 
     void deleteTask(int taskId);
 
+    void updateTask(Task task);
+
+    Task getTask(int taskId);
+
+    void createTask(Task task);
+
+    void resetUserId(int userId);
+
 }
+
+

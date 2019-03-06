@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { AuthorizationService } from '../../services/authorization.service';
 import { Router } from '@angular/router';
+import { AuthorizationDetails } from '../../models/authorization-details';
 
 
 
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   user: User = {
     login: '',
     password: '', 
-    userID: 0
+    userID: 0,
+    tasks: []
   }  
 
   constructor(
@@ -31,7 +33,12 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.auth.login(this.user).subscribe((response: any)=> {
-      localStorage.setItem("Token", response.headers.get("Authorization"));
+      const loginDetails: AuthorizationDetails = {
+        token: response.headers.get("Authorization"),
+        role: response.body.role,
+        login: this.user.login
+      };
+      localStorage.setItem("authorizationDetails", JSON.stringify(loginDetails));
       this.router.navigate(['welcome']);
     },
     err => {

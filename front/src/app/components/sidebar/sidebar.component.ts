@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarElementList } from 'src/app/models/sidebar-element-list';
+import { AuthorizationService } from '../../services/authorization.service'
+
 
 @Component({
   selector: 'app-sidebar',
@@ -9,11 +11,19 @@ import { SidebarElementList } from 'src/app/models/sidebar-element-list';
 export class SidebarComponent implements OnInit {
   
   sidebarList: SidebarElementList[] = [
-    {name: 'Employees', link: '/employees'},
-    {name: 'Tasks', link: '/tasks'},
+    {name: 'Employees', link: '/employees', onlyForAdmin: true},
+    {name: 'Tasks', link: '/tasks', onlyForAdmin: false},
+    {name: 'Profile', link:'/profile/'+ this.auth.getLogin(), onlyForAdmin: false},
   ];
 
-  constructor() { }
+  constructor(
+    private auth: AuthorizationService
+  ) { 
+    this.sidebarList = this.sidebarList.filter((el)=> 
+      (el.onlyForAdmin && this.auth.isAdmin()) || !el.onlyForAdmin
+    )
+
+  }
 
   ngOnInit() {
   }

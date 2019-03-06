@@ -1,5 +1,5 @@
-<div class = "container">
-  <form (ngSubmit)="saveAccount()" #userForm="ngForm">
+<div>
+  <form (ngSubmit)="saveAccount()" #userForm="ngForm" class="form">
   <div class = "login-data">
     <h3>Login Data</h3>
       <div>
@@ -10,9 +10,6 @@
         <label for="password">Password</label>
         <input class="form-group" name="password"  [(ngModel)]="account.user.password" maxlength="60">
       </div>
-
-     
-    
   </div>
 
   <div class = "personal-data">
@@ -38,10 +35,11 @@
   </div>
 
   
-  <div calss = "tasks">
-
-  </div>
+  
   <button class="btn-primary" type="submit" [disabled]="userForm.form.invalid">Save</button>
   </form>
+
+     <app-user-tasks-list [tasks]="account.user.tasks" *ngIf="account.user.tasks.length"></app-user-tasks-list>
+
  
 </div> 

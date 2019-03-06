@@ -1,19 +1,18 @@
-.container {
-    width: 80%;
+:host {
+    width: 70%;
     height: 80%;
     top: 200px;
     color: white;
+    margin-left: 5%;
+    display: block;
 
+    .form {
+        display: inline-block; 
 
-    .form-group{
-        display: block;
+        .form-group{
+            display: block;
+        }
     }
 
-    .login-data{
-        
-    }
-    .personal-data{
-     
-    }
 
 }

@@ -3,6 +3,7 @@ package babackend.BABackend.filters;
 
 
 import babackend.BABackend.services.TokenAuthenticationService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     Logger logger = LoggerFactory.getLogger(JWTLoginFilter.class);
@@ -51,6 +54,12 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
             HttpServletResponse res,
             FilterChain chain,
             Authentication auth) throws IOException, ServletException {
-        TokenAuthenticationService.addAuthentication(res, auth.getName());
+
+        Map<String, String> map = new HashMap<>();
+        map.put("role", auth.getAuthorities().toArray()[0].toString());
+
+
+        TokenAuthenticationService.addAuthentication(res, auth);
+        res.getWriter().write(new ObjectMapper().writeValueAsString(map));
     }
 }

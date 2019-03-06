@@ -20,13 +20,14 @@ export class AppComponent {
   state = false;
 
 
+
   changeSlidebarState(){
     this.state = !this.state
   }
 
   logout(){
     this.auth.logout().subscribe((response: any)=> {
-      localStorage.removeItem("Token");
+      localStorage.removeItem("authorizationDetails");
       this.router.navigate(['login']);
     },
     err => {

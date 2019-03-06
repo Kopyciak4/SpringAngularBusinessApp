@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Task } from '../../models/task';
 import { TaskService } from '../../services/task.service';
 import { Router } from '@angular/router';
+import { AuthorizationService } from "../../services/authorization.service";
 
 @Component({
   selector: 'app-tasks-page',
@@ -10,16 +11,17 @@ import { Router } from '@angular/router';
 })
 export class TasksPageComponent implements OnInit {
 
-  private columnDefs = [];
+  	private columnDefs = [];
 	private rowData = [];
 	private rowSelection = "single";
 	private gridColumnApi;
 	private gridApi;
-	private selectedTask; 
+	private selectedTask: Task;
 
   constructor(
 		private task: TaskService,
 		private router: Router,
+		private auth: AuthorizationService,
   ) {
     
 
@@ -72,18 +74,14 @@ export class TasksPageComponent implements OnInit {
 	}
 
 	addTask() {
-		let idCounter = 0;
-		for(let i = 0; i< this.rowData.length; i++) {	
-			idCounter = this.rowData[i].taskId + 1
-		}
-		console.log(idCounter);
-		
-		
-	
-			
-			
+		// for(let i = 0; i< this.rowData.length; i++) {	
+		// 	idCounter = this.rowData[i].taskId + 1
+		// }
+		this.router.navigate(['task',this.rowData[this.rowData.length - 1].taskId + 1 ]);
+	}
 
-
+	editTask() {
+		this.router.navigate(['task', this.selectedTask.taskId]);
 	}
 
 }
