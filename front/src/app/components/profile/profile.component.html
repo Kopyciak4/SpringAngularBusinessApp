@@ -3,12 +3,12 @@
   <div class = "login-data">
     <h3>Login Data</h3>
       <div>
-        <span>Login</span>
+        <span>Login:</span>
         <div>{{account.user.login}}</div>
       </div>
       <div>
         <label for="password">Password</label>
-        <input class="form-group" name="password"  [(ngModel)]="account.user.password" maxlength="60">
+        <input class="form-group form-control" name="password"  [(ngModel)]="account.user.password" maxlength="60">
       </div>
   </div>
 
@@ -17,19 +17,19 @@
     
       <div>
         <label for="name">Name</label>
-        <input class="form-group" name="name"  [(ngModel)]="account.name" maxlength="25">
+        <input class="form-group form-control" name="name"  [(ngModel)]="account.name" maxlength="25">
       </div>
       <div>
           <label for="surname">Surname</label>
-          <input class="form-group" name="surname" required [(ngModel)]="account.surname" maxlength="25">
+          <input class="form-group form-control" name="surname" required [(ngModel)]="account.surname" maxlength="25">
       </div>
       <div>
           <label for="email">Email</label>
-          <input class="form-group" name="email" required [(ngModel)]="account.email" type="email" maxlength="40" email>
+          <input class="form-group form-control" name="email" required [(ngModel)]="account.email" type="email" maxlength="40" email>
       </div>
       <div>
           <label for="adress">Adress</label>
-          <input class="form-group" name="adress" required [(ngModel)]="account.adress" maxlength="40">
+          <input class="form-group form-control" name="adress" required [(ngModel)]="account.adress" maxlength="40">
       </div>
     
   </div>

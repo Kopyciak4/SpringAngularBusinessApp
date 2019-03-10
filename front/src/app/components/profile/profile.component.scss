@@ -1,16 +1,18 @@
 :host {
     width: 70%;
     height: 80%;
-    top: 200px;
+    margin-top: 10%;
     color: white;
-    margin-left: 5%;
+    margin-left: 15%;
     display: block;
 
     .form {
         display: inline-block; 
 
-        .form-group{
+        .form-group {
             display: block;
+            background-color: black;
+            color: white
         }
     }
 

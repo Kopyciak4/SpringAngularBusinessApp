@@ -3,42 +3,43 @@
         width: 100%;
         height: 25%;
         .adv {
-            padding: 5%;
-            margin-top: 20%;
+            margin-left: 20%;
+            margin-top: 15%;
+            h1 {
+                color: rgb(127, 126, 216);
+            }
             color: white;
         }
 
         .bottom {
-            margin-top: 10%;
-            display: inline-block;
-            height: 100%;
+            position: fixed;
+            bottom: 0;
             width: 100%;
 
-            .about {
-                background-image: url("../../../assets/office2.jpg");
+            .wrap {
                 background-size: 100% 100%;
+                float: left;
+                height: 300px;
                 width: 33.33%;
-                height:120%;
-                display: inline-block;
-            
-                
-            }
-            
-            .contact {
-                background-image: url("../../../assets/phone2.jpg");
-                background-size: 100% 100%;
-                width: 33.33%;
-                height:120%;
-                display: inline-block;
-            }
-        
-            .motto {
-                background-image: url("../../../assets/finger2.jpg");
-                background-size: 100% 100%;
-                width: 33.33%;
-                height:120%;
-                display: inline-block;
+                color: white;
 
+                .details {
+                    margin-top: 15%;
+                    text-align: center;
+                }
+                
+
+                &.about {
+                    background-image: url("../../../assets/matrix2.jpg");           
+                }
+                
+                &.contact {
+                    background-image: url("../../../assets/black2.jpg");
+                }
+            
+                &.motto {
+                    background-image: url("../../../assets/pic3.jpg");
+                }
             }
         }
         

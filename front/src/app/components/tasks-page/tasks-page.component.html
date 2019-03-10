@@ -5,7 +5,7 @@
         <button class="btn btn-lg btn-danger" (click)="deleteTask()"[disabled]="!selectedTask" *ngIf="auth.isAdmin()">Delete task</button>
       </div>
       
-      <ag-grid-angular 
+      <ag-grid-angular
         style="width: 70%; height: 80%;" 
         class="ag-theme-balham"
         [rowData]="rowData" 

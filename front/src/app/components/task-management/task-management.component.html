@@ -5,14 +5,14 @@
     <h4>Task Details</h4>
       <div>
         <label for="task-name">Name</label>
-        <input class="form-group" name="task-name"  [(ngModel)]="task.taskName" maxlength="40" required [disabled]="!auth.isAdmin()">
+        <input class="form-group form-control name" name="task-name"  [(ngModel)]="task.taskName" maxlength="40" required [disabled]="!auth.isAdmin()">
       </div>
       <div class="desc">
           <label for="task-description">Task Description</label>
-          <textarea class="form-group" name="task-description" required [(ngModel)]="task.taskDescription" rows="4" cols="50" maxlength="200" [disabled]="!auth.isAdmin()"> </textarea>
+          <textarea class="form-group form-control" name="task-description" required [(ngModel)]="task.taskDescription" rows="4" cols="50" maxlength="200" [disabled]="!auth.isAdmin()"> </textarea>
       </div>
 
-        <select *ngIf="auth.isAdmin()" [(ngModel)]="task.taskOwner" class="selectbox" name="owner" [compareWith]="compareFn" [disabled]="!auth.isAdmin()">
+        <select *ngIf="auth.isAdmin()"  [(ngModel)]="task.taskOwner" class="selectbox form-control"  name="owner" [compareWith]="compareFn" [disabled]="!auth.isAdmin()">
           <option *ngFor="let account of accounts" [ngValue]="account.user">{{account.user.login}}</option>
        </select>
 

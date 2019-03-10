@@ -1,7 +1,7 @@
 .container {
     width: 80%;
     height: 80%;
-    top: 200px;
+    margin-top: 10%;
     color: white;
 
     .task-data {
@@ -12,14 +12,22 @@
             display: inline;
             position: relative;
             margin-left: 10%;
-            
+            background-color: black;
+            color: white;
+            width: unset;
             
         }
     }
 
 
     .form-group{
+        background-color: black;
         display: block;
+        color: white;
+
+        &.name {
+            width: unset;
+        }
     }
 
 
