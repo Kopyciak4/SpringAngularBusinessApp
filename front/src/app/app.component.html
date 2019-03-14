@@ -5,6 +5,6 @@
     </div>
     <button class="btn btn-lg btn-info logout-btn" (click)="logout()"  [hidden]="!auth.getLogin()">Logout</button>
   </nav>
-  <app-sidebar *ngIf ="state"></app-sidebar>
+  <app-sidebar *ngIf ="state && auth.getLogin()"></app-sidebar>
       <router-outlet></router-outlet>
 </div>

@@ -46,7 +46,10 @@ public class TaskServiceImpl implements TaskService{
     @Override
     public Task getTask(int taskId) {
         Task task =  taskRepository.findById(taskId).orElse(null);
-        task.getTaskOwner().setTasks(null);
+        User u = task.getTaskOwner();
+        if (u != null) {
+            u.setTasks(null);
+        }
         return task;
     }
 

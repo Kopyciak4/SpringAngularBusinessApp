@@ -49,6 +49,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void register(Account account){
+        account.getUser().setRoleId(2);
         encryptPassword(account);
         accountsRepository.save(account);
     }

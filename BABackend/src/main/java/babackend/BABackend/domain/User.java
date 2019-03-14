@@ -33,6 +33,9 @@ public class User implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "taskOwner")
     private List<Task> tasks;
 
+    @Column()
+    private int roleId;
+
 
 
 
@@ -71,7 +74,11 @@ public class User implements Serializable {
         this.tasks = tasks;
     }
 
+    public int getRoleId() {
+        return roleId;
+    }
 
-
-
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
 }

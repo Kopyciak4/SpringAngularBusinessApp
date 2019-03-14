@@ -47,9 +47,7 @@ public class Authorization extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource).usersByUsernameQuery(
                         "SELECT login AS username, password, true FROM user WHERE login =  ?"
         ).authoritiesByUsernameQuery(
-                "SELECT login as username, role from role join user on role.user_id = user.userid WHERE login = ?"
-
-
+                "SELECT login as username, role from role join user on user.role_id = role.id WHERE login = ?"
         );
 
     }
