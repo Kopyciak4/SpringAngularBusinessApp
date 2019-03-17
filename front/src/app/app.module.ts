@@ -4,7 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ToastrModule } from 'ngx-toastr';
 import { AuthGuard } from './guard/auth.guard';
 import { RouteGuard } from './guard/route.guard';
 import { RoleGuard } from './guard/role.guard';
@@ -64,6 +66,10 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     AngularFontAwesomeModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      preventDuplicates: true
+    }),
     AgGridModule.withComponents([]),
   ],
   providers: [

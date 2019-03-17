@@ -1,58 +1,205 @@
-.login {
-    display: inline-block;
-    position: absolute;
-    width: 25vw;
-    height: 50vh;
-    top: 20vh;
-    margin-left: 35vw;
-    margin-right: 20vw;
+@font-face {
+  font-family: OpenSans-Regular;
+  src: url('../../../assets/fonts/OpenSans/OpenSans-Regular.ttf');
+}
 
-    .form {
+@font-face {
+  font-family: OpenSans-Bold;
+  src: url('../../../assets/fonts/OpenSans/OpenSans-Bold.ttf');
+}
 
-        .form-group {
+.login-container {
+  min-height: 97vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2575fc;
+  background: -webkit-linear-gradient(to right, #6a11cb, #2575fc);
+  background: -o-linear-gradient(to right, #6a11cb, #2575fc);
+  background: -moz-linear-gradient(to right, #6a11cb, #2575fc);
+  background: linear-gradient(to right, #6a11cb, #2575fc);
 
-            input[type = text] {
-                position: absolute;
-                width: 90%;
-                height: 10%;
-                margin-left: 1vw;
-                margin-right: 1vw;
-                margin-top: 5vh;
-                border: 2px solid #353333;
-                background-color: #c1c2bb;
-                border-radius: 10px;
-            }
-            input[type = password] {
-                position: absolute;
-                width: 90%;
-                height: 10%;
-                margin-left: 1vw;
-                margin-right: 1vw;
-                margin-top: 15vh;
-                background-color: #c1c2bb;
-                border: 2px solid #353333;
-                border-radius: 10px;
-            }
+  .login-wrap {
+    width: 560px;
 
-            input::placeholder {
-                color: #000000;
-            }
-           
+    .login-form {
+      width: 100%;
+      background-color: transparent;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex;
+      flex-wrap: wrap;
+
+      .login-form-title {
+        width: 100%;
+        font-family: OpenSans-Regular;
+        font-size: 30px;
+        color: #fefefe;
+        line-height: 1.2;
+        text-transform: uppercase;
+        text-align: center;
+        padding-bottom: 43px;
+      }
+
+      .input-wrap {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+        align-items: flex-end;
+        width: 50%;
+        height: 75px;
+        position: relative;
+        border: 1px solid #e0e0e0;
+        border-bottom: none;
+        background-color: #fff;
+
+        &.login {
+          border-top-left-radius: 12px;
+          border-right: none;
         }
 
-        .submit-btn {
+        &.password {
+          border-top-right-radius: 12px;
+        }
+
+        .input-label {
+          font-family: OpenSans-Bold;
+          font-size: 15px;
+          color: #555555;
+          line-height: 1.2;
+          position: absolute;
+          pointer-events: none;
+          padding-left: 30px;
+          top: 28px;
+          -webkit-transition: all 0.4s;
+          -o-transition: all 0.4s;
+          -moz-transition: all 0.4s;
+          transition: all 0.4s;
+        }
+
+        input {
+          font-family: OpenSans-Bold;
+          font-size: 15px;
+          color: #555555;
+          line-height: 1.2;
+          background: transparent;
+          padding: 0 30px;
+          outline: none;
+          border: none;
+          height: 100%;
+          -webkit-transition: all 0.4s;
+          -o-transition: all 0.4s;
+          -moz-transition: all 0.4s;
+          transition: all 0.4s;
+
+          &:focus {
+            height: 55px;
+
+            & + .input-label {
+              top: 10px;
+              font-size: 13px;
+              color: #111111;
+            }
+          }
+
+          &:not(:placeholder-shown) {
+            height: 55px;
+
+            & + .input-label {
+              top: 10px;
+              font-size: 13px;
+              color: #111111;
+            }
+          }
+        }
+      }
+
+      .container-login-form-btn {
+        width: 100%;
+
+        .login-form-btn {
+          font-family: OpenSans-Bold;
+          font-size: 15px;
+          color: #fff;
+          text-transform: uppercase;
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -moz-box;
+          display: -ms-flexbox;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0 20px;
+          width: 100%;
+          height: 70px;
+          border-bottom-left-radius: 12px;
+          border-bottom-right-radius: 12px;
+          overflow: hidden;
+          background: #111111;
+          -webkit-transition: all 0.4s;
+          -o-transition: all 0.4s;
+          -moz-transition: all 0.4s;
+          transition: all 0.4s;
+          position: relative;
+          z-index: 1;
+          outline: none !important;
+          border: none;
+
+          &::before {
+            content: "";
             position: absolute;
-            text-align: center;
-            width: 90%;
-            margin-left: 1vw;
-            margin-right: 1vw;
-            margin-top: 25vh;
-            border-radius: 10px;
-            height: 7vh;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            background: #2575fc;
+            background: -webkit-linear-gradient(to left, #6a11cb, #2575fc);
+            background: -o-linear-gradient(to left, #6a11cb, #2575fc);
+            background: -moz-linear-gradient(to left, #6a11cb, #2575fc);
+            background: linear-gradient(to left, #6a11cb, #2575fc);
+            -webkit-transition: all 0.4s;
+            -o-transition: all 0.4s;
+            -moz-transition: all 0.4s;
+            transition: all 0.4s;
+          }
 
+          &:hover:not(:disabled) {
+            background-color: transparent;
+            cursor: pointer;
+
+            &:before {
+              opacity: 1;
+            }
+          }
+
+          &:disabled {
+            opacity: 0.7;
+          }
         }
-
+      }
     }
-    
-    
+  }
+}
+
+@media (max-width: 576px) {
+  .input-wrap {
+    width: 100%;
+
+    &.login {
+      border-top-right-radius: 12px;
+      border-right: 1px solid #e0e0e0;
+    }
+
+    &.password {
+      border-top-right-radius: 0px;
+    }
+  }
 }

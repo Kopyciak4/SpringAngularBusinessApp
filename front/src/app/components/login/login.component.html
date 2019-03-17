@@ -1,17 +1,28 @@
-<div class = "login">
-  <div class = "form">
-    <form (ngSubmit)="login()"> 
-      <div class = "form-group">
-        <input type = "text" placeholder="username" [(ngModel)]="user.login" name="login">
-      </div>
-      <div class = "form-group">
-        <input type = "password" placeholder="password" [(ngModel)]="user.password" name="password">
-      </div>
-      <button class="btn btn-lg submit-btn" type="submit"> 
-        Login
-      </button>
-    </form>
-    
-    
-  </div>
+<div>
+	<div class="login-container">
+		<div class="login-wrap">
+			<form class="login-form" (ngSubmit)="login()" #loginForm="ngForm">
+				<span class="login-form-title">
+					Account Login
+				</span>
+
+				<div class="input-wrap login">
+					<input type="text" [(ngModel)]="user.login" name="username" placeholder=" " required>
+					<span class="input-label">Username</span>
+				</div>
+
+
+				<div class="input-wrap password">
+					<input type="password" name="password" [(ngModel)]="user.password" placeholder=" " required>
+					<span class="input-label">Password</span>
+				</div>
+
+				<div class="container-login-form-btn">
+					<button class="login-form-btn" type="submit" [disabled]="loginForm.form.invalid">
+						Sign in
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>

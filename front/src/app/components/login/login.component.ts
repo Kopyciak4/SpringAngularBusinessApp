@@ -3,7 +3,7 @@ import { User } from 'src/app/models/user';
 import { AuthorizationService } from '../../services/authorization.service';
 import { Router } from '@angular/router';
 import { AuthorizationDetails } from '../../models/authorization-details';
-
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthorizationService,
     private router:Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -42,10 +43,11 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['welcome']);
     },
     err => {
-      console.log("err");
-    }); 
+      if (err.status === 401) {
+        this.toastr.error("Bad login or password", "Authorization failed");
+      } else {
+        this.toastr.error("Some problems on serverside", "Request failed");
+      }
+    });
   }
-
-  
-
 }
